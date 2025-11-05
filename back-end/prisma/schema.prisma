@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  releaseYear Int
+  rating      Float?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  locations FilmingLocation[]
+  platforms MoviePlatform[]
+  genres    MovieGenre[]
+}
+
+model FilmingLocation {
+  id        String   @id @default(uuid())
+  movieId   String
+  name      String
+  address   String?
+  lat       Float
+  lng       Float
+  notes     String?
+  createdAt DateTime @default(now())
+
+  movie Movie @relation(fields: [movieId], references: [id])
+}
+
+model Platform {
+  id      String          @id @default(uuid())
+  name    String          @unique
+  kind    String
+  iconUrl String?
+  movies  MoviePlatform[]
+}
+
+model MoviePlatform {
+  id         String  @id @default(uuid())
+  movieId    String
+  platformId String
+  url        String?
+
+  movie    Movie    @relation(fields: [movieId], references: [id])
+  platform Platform @relation(fields: [platformId], references: [id])
+}
+
+model Genre {
+  id     String       @id @default(uuid())
+  name   String       @unique
+  movies MovieGenre[]
+}
+
+model MovieGenre {
+  movieId String
+  genreId String
+
+  movie Movie @relation(fields: [movieId], references: [id])
+  genre Genre @relation(fields: [genreId], references: [id])
+
+  @@id([movieId, genreId])
+}
