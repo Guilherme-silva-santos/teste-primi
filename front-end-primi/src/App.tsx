@@ -1,7 +1,13 @@
+import { Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home.tsx";
+import { MovieDetail } from "./pages/MovieDetail.tsx";
 function App() {
   return (
-    <div className="bg-amber-400">
-      <h1>Vite + React</h1>
+    <div className="min-h-screen bg-gray-950 text-gray-100">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+      </Routes>
     </div>
   );
 }
