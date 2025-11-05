@@ -1,14 +1,19 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home.tsx";
 import { MovieDetail } from "./pages/MovieDetail.tsx";
+
+import { AddMovie } from "./pages/AddMovie.tsx";
+import { ScreenTemplate } from "./presentation/atomic/templates/ScreenTemplate";
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
+    <ScreenTemplate>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/add-movie" element={<AddMovie />} />
       </Routes>
-    </div>
+    </ScreenTemplate>
   );
 }
 

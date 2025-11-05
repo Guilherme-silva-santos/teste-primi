@@ -8,13 +8,7 @@
     "types": ["vite/client"],
     "skipLibCheck": true,
     "baseUrl": "src",
-    "paths": {
-      "@data/*": ["data/*"],
-      "@hooks/*": ["hooks/*"],
-      "@model/*": ["model/*"],
-      "@service/*": ["service/*"],
-      "@presentation/*": ["presentation/*"]
-    },
+  
 
     /* Bundler mode */
     "moduleResolution": "bundler",

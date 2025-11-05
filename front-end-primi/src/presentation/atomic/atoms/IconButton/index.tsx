@@ -6,14 +6,12 @@ type IconNames = keyof typeof MaterialIcons;
 type IconButtonProps = {
   iconName: IconNames;
   text: string;
-  iconColor?: string;
   iconSize?: number;
   onClick?: () => void;
 };
 
 export const IconButton: FC<IconButtonProps> = ({
   iconName,
-  iconColor,
   iconSize,
   onClick,
   text,
@@ -21,9 +19,12 @@ export const IconButton: FC<IconButtonProps> = ({
   const IconComponent = MaterialIcons[iconName];
 
   return (
-    <button onClick={onClick}>
-      <IconComponent color={iconColor} size={iconSize} />
-      <p>{text}</p>
+    <button
+      onClick={onClick}
+      className="flex flex-row items-center gap-1 hover:cursor-pointer hover:opacity-70 duration-300"
+    >
+      <IconComponent size={iconSize} className="text-gray-300" />
+      <p className="text-sm text-gray-300 font-semibold">{text}</p>
     </button>
   );
 };
