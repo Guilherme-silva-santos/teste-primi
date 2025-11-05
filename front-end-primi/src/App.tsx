@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/add-movie" element={<AddMovie />} />
+        <Route path="/add-movie/:id" element={<AddMovie />} />
       </Routes>
     </ScreenTemplate>
   );

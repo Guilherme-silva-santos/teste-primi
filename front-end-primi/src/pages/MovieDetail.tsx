@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { IconButton } from "../presentation/atomic/atoms/IconButton";
 import { RowDetail } from "../presentation/atomic/atoms/RowDetail";
 
 export function MovieDetail() {
   // const { id } = useParams<{ id: string }>();
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-wrap items-center justify-center md:flex-nowrap flex-row gap-10 ">
@@ -13,7 +16,13 @@ export function MovieDetail() {
       />
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-3">
-          <IconButton iconName="MdArrowBack" text="Voltar" />
+          <IconButton
+            iconName="MdArrowBack"
+            text="Voltar"
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
           <h1 className="text-3xl font-bold text-gray-100 ">
             Homem-Aranha: Através do Aranhaverso
           </h1>

@@ -123,7 +123,12 @@ export function Home() {
         <h1 className="text-2xl font-bold font-luckiest text-gray-100">
           Explorar
         </h1>
-        <Input iconName="MdSearch" onChange={() => {}} value="" />
+        <Input
+          iconName="MdSearch"
+          onChange={() => {}}
+          value=""
+          placeholder="Pesquisar..."
+        />
       </div>
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {movies.map((movie) => (

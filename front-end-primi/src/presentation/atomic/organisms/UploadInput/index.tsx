@@ -28,7 +28,7 @@ export const UploadInput: FC<UploadInputProps> = ({ onChange }) => {
   return (
     <div
       onClick={handleClick}
-      className="w-100 h-120 flex items-center justify-center bg-gray-800 border border-gray-700 rounded-xl cursor-pointer overflow-hidden hover:border-purple-500/60 transition-all duration-300"
+      className="w-100 h-150 flex items-center justify-center bg-gray-800 border border-gray-700 rounded-xl cursor-pointer overflow-hidden hover:border-purple-500/60 transition-all duration-300"
     >
       {preview ? (
         <img

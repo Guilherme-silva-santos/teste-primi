@@ -7,9 +7,15 @@ type InputProps = {
   onChange: (value: string) => void;
   value: string;
   iconName: IconNames;
+  placeholder?: string;
 };
 
-export const Input: FC<InputProps> = ({ onChange, value, iconName }) => {
+export const Input: FC<InputProps> = ({
+  onChange,
+  value,
+  iconName,
+  placeholder,
+}) => {
   const IconComponent = MaterialIcons[iconName];
 
   return (
@@ -19,7 +25,7 @@ export const Input: FC<InputProps> = ({ onChange, value, iconName }) => {
         onChange={(e) => onChange(e.target.value)}
         value={value}
         type="text"
-        placeholder="Digite aqui..."
+        placeholder={placeholder}
         className="flex-1 border-none outline-none"
       />
     </div>
