@@ -6,6 +6,8 @@ import {
   remove,
   update,
 } from "../controllers/movie.controller.js";
+import { validate } from "../middleware/validate.js";
+import { movieSchema, movieUpdateSchema } from "../validators/movie.schema.js";
 
 const router = Router();
 
@@ -207,7 +209,7 @@ router.get("/:id", getById);
  *       500:
  *         description: Erro ao criar o filme
  */
-router.post("/", create);
+router.post("/", validate(movieSchema), create);
 
 /**
  * @swagger
@@ -233,7 +235,7 @@ router.post("/", create);
  *       404:
  *         description: Filme não encontrado
  */
-router.put("/:id", update);
+router.put("/:id", validate(movieUpdateSchema), update);
 
 /**
  * @swagger
