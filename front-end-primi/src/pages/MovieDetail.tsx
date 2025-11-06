@@ -1,56 +1,72 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IconButton } from "../presentation/atomic/atoms/IconButton";
 import { RowDetail } from "../presentation/atomic/atoms/RowDetail";
 
+import { useEffect } from "react";
+import { useMovie } from ".././data/Movies/";
+
 export function MovieDetail() {
-  // const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();
+
+  const { findMovieById, movieById, deleteMovie } = useMovie();
+
+  useEffect(() => {
+    if (id) {
+      findMovieById(id);
+    }
+  }, [id]);
 
   const navigate = useNavigate();
+
+  const handleDelete = () => {
+    if (!id) return;
+    deleteMovie(id);
+    navigate("/");
+  };
 
   return (
     <div className="flex flex-wrap items-center justify-center md:flex-nowrap flex-row gap-10 ">
       <img
-        src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"
+        src={movieById?.imageUrl}
         alt=""
-        className="rounded-lg h-120 object-cover opacity-80"
+        className="rounded-lg h-120 max-w-[300px] object-cover opacity-80"
       />
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-3">
-          <IconButton
-            iconName="MdArrowBack"
-            text="Voltar"
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
+          <div className="flex flex-row items-center justify-between">
+            <IconButton
+              iconName="MdArrowBack"
+              text="Voltar"
+              onClick={() => {
+                navigate(-1);
+              }}
+            />
+            <div className="flex flex-row gap-2">
+              <IconButton
+                iconSize={20}
+                iconName="MdDelete"
+                onClick={handleDelete}
+              />
+              <IconButton
+                iconSize={20}
+                iconName="MdEdit"
+                onClick={() => {
+                  navigate("/add-movie/" + id);
+                }}
+              />
+            </div>
+          </div>
           <h1 className="text-3xl font-bold text-gray-100 ">
-            Homem-Aranha: Através do Aranhaverso
+            {movieById?.title}
           </h1>
-          <RowDetail title="Gênero:" description="Animação, Aventura, Ação" />
-          <RowDetail title="Ano:" description="2023" />
-          <RowDetail title="Classificação:" description="4.5 / 5" />
+          <RowDetail title="Ano:" description={movieById?.releaseYear ?? ""} />
+          <RowDetail
+            title="Classificação:"
+            description={`${movieById?.rating} / 10`}
+          />
         </div>
         <div>
-          <p className="text-gray-300 text-justify">
-            Do cineasta Yorgos Lanthimos e da produtora Emma Stone, vem o conto
-            incrível e a evolução fantástica de Bella Baxter (Stone), uma jovem
-            mulher trazida de volta à vida pelo brilhante e pouco ortodoxo
-            cientista Dr. Godwin Baxter (Willem Dafoe). Sob a proteção de
-            Baxter, Bella está ansiosa para aprender. Faminta pela mundanidade
-            que lhe falta, Bella foge com Duncan Wedderburn (Mark Ruffalo), um
-            advogado astuto e depravado, em uma aventura relâmpago pelos
-            continentes. Livre dos preconceitos de sua época, Bella se torna
-            firme em seu propósito de defender a igualdade e a libertação. Do
-            cineasta Yorgos Lanthimos e da produtora Emma Stone, vem o conto
-            incrível e a evolução fantástica de Bella Baxter (Stone), uma jovem
-            mulher trazida de volta à vida pelo brilhante e pouco ortodoxo
-            cientista Dr. Godwin Baxter (Willem Dafoe). Sob a proteção de
-            Baxter, Bella está ansiosa para aprender. Faminta pela mundanidade
-            que lhe falta, Bella foge com Duncan Wedderburn (Mark Ruffalo), um
-            advogado astuto e depravado, em uma aventura relâmpago pelos
-            continentes. Livre dos preconceitos de sua época, Bella se torna
-            firme em seu propósito de defender a igualdade e a libertação.
-          </p>
+          <p className="text-gray-300 text-justify">{movieById?.description}</p>
         </div>
       </div>
     </div>

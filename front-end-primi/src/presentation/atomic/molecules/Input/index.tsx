@@ -5,7 +5,7 @@ type IconNames = keyof typeof MaterialIcons;
 
 type InputProps = {
   onChange: (value: string) => void;
-  value: string;
+  value?: string;
   iconName: IconNames;
   placeholder?: string;
 };

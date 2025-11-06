@@ -2,9 +2,8 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 
 interface MovieCardProps {
-  id: number;
+  id: string;
   title: string;
-  genre: string;
   year: number;
   rating: number;
   image: string;
@@ -13,7 +12,6 @@ interface MovieCardProps {
 export const MovieCard: FC<MovieCardProps> = ({
   id,
   title,
-  genre,
   year,
   rating,
   image,
@@ -33,14 +31,12 @@ export const MovieCard: FC<MovieCardProps> = ({
       <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
 
       <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-gray-800/80 px-2 py-1 text-sm font-medium text-white">
-        ⭐ {rating.toFixed(1)} / 5
+        ⭐ {rating.toFixed(1)} / 10
       </div>
 
       <div className="absolute bottom-3 left-3 right-3">
         <h3 className="font-bold text-white text-lg">{title}</h3>
-        <p className="text-sm text-gray-300">
-          {genre} • {year}
-        </p>
+        <p className="text-sm text-gray-300">{year}</p>
       </div>
     </Link>
   );

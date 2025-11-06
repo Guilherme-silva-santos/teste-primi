@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 type RowDetailProps = {
   title: string;
-  description: string;
+  description: string | number;
 };
 
 export const RowDetail: FC<RowDetailProps> = ({ title, description }) => {

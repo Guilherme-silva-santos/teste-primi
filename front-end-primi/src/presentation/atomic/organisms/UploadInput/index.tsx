@@ -4,12 +4,13 @@ import * as MaterialIcons from "react-icons/md";
 const { MdUpload } = MaterialIcons;
 
 interface UploadInputProps {
-  onChange: (file: File) => void;
+  value?: string;
+  onChange: (url: string) => void;
 }
 
-export const UploadInput: FC<UploadInputProps> = ({ onChange }) => {
+export const UploadInput: FC<UploadInputProps> = ({ value, onChange }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(value || null);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -18,10 +19,9 @@ export const UploadInput: FC<UploadInputProps> = ({ onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      onChange(file);
-      const reader = new FileReader();
-      reader.onload = () => setPreview(reader.result as string);
-      reader.readAsDataURL(file);
+      const localUrl = URL.createObjectURL(file);
+      setPreview(localUrl);
+      onChange(localUrl);
     }
   };
 
@@ -42,7 +42,6 @@ export const UploadInput: FC<UploadInputProps> = ({ onChange }) => {
           <p className="text-gray-400 text-sm font-medium">Fazer upload</p>
         </div>
       )}
-
       <input
         ref={fileInputRef}
         onChange={handleChange}

@@ -138,3 +138,10 @@ src/
  ┣ types/           # Tipagens globais
  ┗ server.ts        # Ponto de entrada da aplicação
 ```
+
+
+## Build docker
+docker build -f 'DockerFile' -t 'backend:latest' '.'
+## Rodar Docker 
+docker run -it -p 3000:3000/tcp backend:latest
+docker compose up --build 
