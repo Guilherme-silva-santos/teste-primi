@@ -27,37 +27,38 @@ export function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold font-luckiest text-gray-100">
-          Explorar
-        </h1>
-        <Input
-          iconName="MdSearch"
-          onChange={handleSearchChange}
-          value={search}
-          placeholder="Pesquisar por título..."
-        />
-      </div>
-
-      {findAllMoviesRequestStatus.status === "pending" && (
-        <p className="text-gray-400 text-center">Carregando filmes...</p>
-      )}
-
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {allMovies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            year={movie.releaseYear}
-            image={movie.imageUrl}
-            rating={movie.rating}
-            title={movie.title}
-            id={movie.id}
+    <div>
+      <div className="flex flex-col gap-8 flex-1">
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold font-luckiest text-gray-100">
+            Explorar
+          </h1>
+          <Input
+            iconName="MdSearch"
+            onChange={handleSearchChange}
+            value={search}
+            placeholder="Pesquisar por título..."
           />
-        ))}
-      </div>
+        </div>
 
-      <div className="flex justify-center gap-4 mt-6 items-end">
+        {findAllMoviesRequestStatus.status === "pending" && (
+          <p className="text-gray-400 text-center">Carregando filmes...</p>
+        )}
+
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex-1">
+          {allMovies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              year={movie.releaseYear}
+              image={movie.imageUrl}
+              rating={movie.rating}
+              title={movie.title}
+              id={movie.id}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-center gap-4 items-center">
         <button
           onClick={handlePrevPage}
           disabled={page === 1}

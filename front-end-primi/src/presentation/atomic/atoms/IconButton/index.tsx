@@ -26,7 +26,7 @@ export const IconButton: FC<IconButtonProps> = ({
       className={`flex flex-row items-center gap-1 hover:cursor-pointer hover:opacity-70 duration-300 ${className}`}
     >
       <IconComponent size={iconSize} className="text-gray-300" />
-      <p className="text-sm text-gray-300 font-semibold">{text}</p>
+      {text && <p className="text-sm text-gray-300 font-semibold">{text}</p>}
     </button>
   );
 };

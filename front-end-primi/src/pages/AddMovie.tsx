@@ -10,6 +10,8 @@ import {
   type MovieFormData,
 } from "../presentation/validators/create-movie-schema";
 
+import { Button } from "../presentation/atomic/atoms/Button";
+
 export function AddMovie() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -179,6 +181,10 @@ export function AddMovie() {
           )}
         />
 
+        <h2 className="text-lg font-semibold text-gray-100">
+          Local de Gravação
+        </h2>
+
         <Controller
           name="placeName"
           control={control}
@@ -271,19 +277,8 @@ export function AddMovie() {
         />
 
         <div className="flex justify-end gap-3 mt-4">
-          <button
-            type="button"
-            onClick={() => navigate(-1)}
-            className="text-gray-400 hover:text-gray-200 transition"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md transition"
-          >
-            Salvar
-          </button>
+          <Button variant="cancel" />
+          <Button variant="save" />
         </div>
       </form>
     </div>
