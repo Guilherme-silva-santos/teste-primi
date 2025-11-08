@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
+import deafultImage from "../../../../assets/AdobeStock_440561250.jpeg";
 
 interface MovieCardProps {
   id: string;
@@ -22,7 +23,7 @@ export const MovieCard: FC<MovieCardProps> = ({
       className="relative block overflow-hidden rounded-2xl bg-gray-900/50 hover:scale-[1.02] transition-transform duration-300"
     >
       <img
-        src={image}
+        src={image ?? deafultImage}
         alt={title}
         className="h-80 w-full object-cover opacity-80"
         loading="lazy"

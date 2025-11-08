@@ -56,8 +56,11 @@ export async function getMovieById(id: string) {
   return prisma.movie.findUnique({
     where: { id },
     include: {
-      genres: { include: { genre: true } },
-      platforms: { include: { platform: true } },
+      platforms: {
+        include: {
+          platform: true,
+        },
+      },
       locations: true,
     },
   });

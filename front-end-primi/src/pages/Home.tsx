@@ -27,7 +27,7 @@ export function Home() {
   };
 
   return (
-    <div>
+    <div className="gap-8 flex flex-col">
       <div className="flex flex-col gap-8 flex-1">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold font-luckiest text-gray-100">
