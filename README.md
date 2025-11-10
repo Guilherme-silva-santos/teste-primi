@@ -134,7 +134,3 @@ http://localhost
   O schema é sincronizado automaticamente ao subir o container.
 - O frontend é servido via **Nginx** na porta 80.
 - Certifique-se de que nenhuma dessas portas (80, 3000, 5433) esteja sendo usada por outro processo local.
-
----
-
-Feito com ❤️ usando **Node.js**, **React** e **PostgreSQL**.
