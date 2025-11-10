@@ -14,6 +14,10 @@ export interface MovieInput {
   rating?: number;
   imageUrl?: string;
   locations?: LocationInput[];
+  platforms?: {
+    platformId: string;
+    url?: string;
+  }[];
 }
 
 export interface MovieFilters {

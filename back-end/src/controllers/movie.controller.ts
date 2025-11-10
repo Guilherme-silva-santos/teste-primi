@@ -42,6 +42,7 @@ export async function getById(req: Request, res: Response) {
 
 export async function create(req: Request, res: Response) {
   try {
+    console.log(JSON.stringify(req.body, null, 2));
     const movie = await createMovie(req.body);
     res.status(201).json(movie);
   } catch (error) {

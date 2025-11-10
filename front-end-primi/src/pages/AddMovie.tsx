@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMovie } from "../data/Movies";
+import { usePlatform } from "../data/Platform";
 import { Input } from "../presentation/atomic/molecules/Input";
+import { Select } from "../presentation/atomic/molecules/Select";
 import { UploadInput } from "../presentation/atomic/organisms/UploadInput";
 import {
   movieSchema,
@@ -16,15 +18,10 @@ export function AddMovie() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { createMovie, editMovie, findMovieById, movieById } = useMovie();
+  const { allPlatforms, getAllPlatforms } = usePlatform();
   const isEditable = Boolean(id);
 
   const [imageUrl, setImageUrl] = useState<string>("");
-
-  useEffect(() => {
-    if (id) {
-      findMovieById(id);
-    }
-  }, [id]);
 
   const {
     handleSubmit,
@@ -51,6 +48,7 @@ export function AddMovie() {
           notes: data.notes,
         },
       ],
+      platforms: data.platforms,
     };
 
     if (isEditable && id) {
@@ -61,6 +59,19 @@ export function AddMovie() {
 
     navigate("/");
   };
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
+  useEffect(() => {
+    getAllPlatforms();
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      findMovieById(id);
+    }
+  }, [id]);
 
   useEffect(() => {
     if (isEditable && movieById) {
@@ -74,6 +85,10 @@ export function AddMovie() {
         latitude: movieById.locations?.[0]?.lat?.toString() || "",
         longitude: movieById.locations?.[0]?.lng?.toString() || "",
         notes: movieById.locations?.[0]?.notes || "",
+        platforms:
+          movieById.platforms?.length > 0
+            ? [{ platformId: movieById.platforms[0].platform.id }]
+            : [],
       });
       setImageUrl(movieById.imageUrl || "");
     }
@@ -273,6 +288,26 @@ export function AddMovie() {
                 </span>
               )}
             </>
+          )}
+        />
+
+        <Controller
+          name="platforms"
+          control={control}
+          render={({ field }) => (
+            <Select
+              iconName="MdVideoLibrary"
+              placeholder="Selecione uma plataforma"
+              options={
+                allPlatforms?.map((p) => ({
+                  label: p.name,
+                  value: p.id,
+                })) || []
+              }
+              value={field.value?.[0]?.platformId || ""}
+              onChange={(value) => field.onChange([{ platformId: value }])}
+              error={errors.platforms?.[0]?.platformId?.message}
+            />
           )}
         />
 

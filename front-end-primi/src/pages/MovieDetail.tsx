@@ -27,6 +27,8 @@ export function MovieDetail() {
     navigate("/");
   };
 
+  console.log(movieById);
+
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="flex flex-wrap items-center justify-center md:flex-nowrap flex-row gap-10 ">
@@ -80,14 +82,7 @@ export function MovieDetail() {
           <div>
             {movieById?.platforms.map((platform) => (
               <p key={platform.id} className="text-gray-300 text-justify">
-                {platform.platform.name} —{" "}
-                <a
-                  href={platform.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  assistir
-                </a>
+                {platform.platform.name} — <a href={platform.url}>assistir</a>
               </p>
             ))}
           </div>

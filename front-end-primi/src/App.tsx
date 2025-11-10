@@ -3,6 +3,7 @@ import { Home } from "./pages/Home.tsx";
 import { MovieDetail } from "./pages/MovieDetail.tsx";
 
 import { MovieProvider } from "../src/data/Movies/index.tsx";
+import { PlatformProvider } from "../src/data/Platform/index.tsx";
 import { AddMovie } from "./pages/AddMovie.tsx";
 import { ScreenTemplate } from "./presentation/atomic/templates/ScreenTemplate";
 
@@ -10,12 +11,14 @@ function App() {
   return (
     <ScreenTemplate>
       <MovieProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movie/:id" element={<MovieDetail />} />
-          <Route path="/add-movie" element={<AddMovie />} />
-          <Route path="/add-movie/:id" element={<AddMovie />} />
-        </Routes>
+        <PlatformProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:id" element={<MovieDetail />} />
+            <Route path="/add-movie" element={<AddMovie />} />
+            <Route path="/add-movie/:id" element={<AddMovie />} />
+          </Routes>
+        </PlatformProvider>
       </MovieProvider>
     </ScreenTemplate>
   );

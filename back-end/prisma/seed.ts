@@ -3,6 +3,79 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  const streamingPlatforms = [
+    {
+      name: "Netflix",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+    },
+    {
+      name: "HBO Max",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg",
+    },
+    {
+      name: "Prime Video",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png",
+    },
+    {
+      name: "Disney+",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg",
+    },
+    {
+      name: "Apple TV+",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/1/19/Apple_TV%2B_logo.svg",
+    },
+    {
+      name: "Paramount+",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/5/56/Paramount%2B_logo.svg",
+    },
+    {
+      name: "Star+",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/d/d4/Star%2B_logo.svg",
+    },
+    {
+      name: "Globoplay",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/5/59/Globoplay_logo_2021.svg",
+    },
+    {
+      name: "Crunchyroll",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/7/75/Crunchyroll_Logo.svg",
+    },
+    {
+      name: "YouTube Premium",
+      kind: "STREAMING",
+      iconUrl:
+        "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_Premium_logo_%282018%29.svg",
+    },
+  ];
+
+  const platforms: { [key: string]: any } = {};
+  for (const platform of streamingPlatforms) {
+    const created = await prisma.platform.upsert({
+      where: { name: platform.name },
+      update: {},
+      create: platform,
+    });
+    platforms[platform.name] = created;
+  }
+
   const netflix = await prisma.platform.upsert({
     where: { name: "Netflix" },
     update: {},

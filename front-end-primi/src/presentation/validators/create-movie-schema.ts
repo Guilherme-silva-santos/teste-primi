@@ -40,6 +40,11 @@ export const movieSchema = z.object({
     .string()
     .max(200, "As observações devem ter no máximo 200 caracteres")
     .optional(),
+  platforms: z.array(
+    z.object({
+      platformId: z.string().uuid({ message: "Selecione uma plataforma" }),
+    })
+  ),
 });
 
 export type MovieFormData = z.infer<typeof movieSchema>;

@@ -67,27 +67,47 @@ export async function getMovieById(id: string) {
 }
 
 export async function createMovie(data: MovieInput) {
-  return prisma.movie.create({
-    data: {
-      title: data.title,
-      description: data.description,
-      releaseYear: data.releaseYear,
-      rating: data.rating,
-      imageUrl: data.imageUrl,
-      locations: data.locations
-        ? {
-            create: data.locations.map((loc) => ({
-              name: loc.name,
-              address: loc.address,
-              lat: loc.lat,
-              lng: loc.lng,
-              notes: loc.notes,
-            })),
-          }
-        : undefined,
-    },
-    include: { locations: true },
-  });
+  try {
+    const movie = await prisma.movie.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        releaseYear: data.releaseYear,
+        rating: data.rating,
+        imageUrl: data.imageUrl,
+
+        locations: data.locations?.length
+          ? {
+              create: data.locations.map((loc) => ({
+                name: loc.name,
+                address: loc.address,
+                lat: loc.lat,
+                lng: loc.lng,
+                notes: loc.notes,
+              })),
+            }
+          : undefined,
+
+        platforms: data.platforms?.length
+          ? {
+              create: data.platforms.map((p) => ({
+                url: p.url ?? null,
+                platform: { connect: { id: p.platformId } },
+              })),
+            }
+          : undefined,
+      },
+      include: {
+        locations: true,
+        platforms: { include: { platform: true } },
+      },
+    });
+
+    return movie;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function updateMovie(id: string, data: MovieInput) {
@@ -99,6 +119,7 @@ export async function updateMovie(id: string, data: MovieInput) {
       releaseYear: data.releaseYear,
       rating: data.rating,
       imageUrl: data.imageUrl,
+
       locations: data.locations
         ? {
             deleteMany: {
@@ -125,8 +146,21 @@ export async function updateMovie(id: string, data: MovieInput) {
             })),
           }
         : undefined,
+
+      platforms: data.platforms
+        ? {
+            deleteMany: {},
+            create: data.platforms.map((p) => ({
+              url: p.url ?? null,
+              platform: { connect: { id: p.platformId } },
+            })),
+          }
+        : undefined,
     },
-    include: { locations: true },
+    include: {
+      locations: true,
+      platforms: { include: { platform: true } },
+    },
   });
 }
 
