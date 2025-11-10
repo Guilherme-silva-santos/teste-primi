@@ -7,62 +7,47 @@ async function main() {
     {
       name: "Netflix",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+      iconUrl: "https://www.netflix.com/",
     },
     {
       name: "HBO Max",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg",
+      iconUrl: "https://www.hbomax.com/",
     },
     {
       name: "Prime Video",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png",
+      iconUrl: "https://www.primevideo.com/",
     },
     {
       name: "Disney+",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg",
+      iconUrl: "https://www.disneyplus.com/",
     },
     {
       name: "Apple TV+",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/1/19/Apple_TV%2B_logo.svg",
+      iconUrl: "https://tv.apple.com/",
     },
     {
       name: "Paramount+",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/5/56/Paramount%2B_logo.svg",
+      iconUrl: "https://www.paramountplus.com/",
     },
     {
       name: "Star+",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/d/d4/Star%2B_logo.svg",
+      iconUrl: "https://www.starplus.com/",
     },
     {
       name: "Globoplay",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/5/59/Globoplay_logo_2021.svg",
+      iconUrl: "https://globoplay.globo.com/",
     },
     {
       name: "Crunchyroll",
       kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/7/75/Crunchyroll_Logo.svg",
-    },
-    {
-      name: "YouTube Premium",
-      kind: "STREAMING",
-      iconUrl:
-        "https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_Premium_logo_%282018%29.svg",
+      iconUrl: "https://www.crunchyroll.com/",
     },
   ];
 
@@ -200,7 +185,7 @@ async function main() {
       releaseYear: 2014,
       rating: 8.6,
       imageUrl:
-        "https://m.media-amazon.com/images/I/71n58VxqFjL._AC_SL1024_.jpg",
+        "https://upload.wikimedia.org/wikipedia/pt/3/3a/Interstellar_Filme.png",
       platforms: {
         create: [
           {
